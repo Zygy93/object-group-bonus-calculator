@@ -44,3 +44,8 @@ return bonusPercent(values) + loyaltyBonus(values) - salarySize(values);
 
 }
 console.log(calcBonus(jem));
+function totalBonus(bonusPercent, annualSalary){
+  return ((bonusPercent/100)*annualSalary);
+
+}
+console.log(totalBonus());
