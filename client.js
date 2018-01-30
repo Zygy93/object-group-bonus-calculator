@@ -8,62 +8,53 @@ var mayella = { name: "Mayella", employeeNumber: "89068", annualSalary: "35000",
 var employees = [ atticus, jem, boo, scout, robert, mayella ];
 
 // YOU SHOULD NOT NEED TO CHANGE ANYTHING ABOVE THIS POINT
-console.log(employees);
+
 function calcBonus (obj) {
-var values = Object.values(obj);
-console.log(values);
-function bonusPercent(values) {
-if (values[3] <= 2 ) {
-  return  0;
-  } else if (values[3] === 3) {
-    return 4;
-  } else if (values[3] === 4) {
-    return  6;
-  } else  if (values[3] === 5) {
-    return 10;
+
+  function bonusPercent(obj) {
+    if (obj.reviewRating <= 2 ) {
+      return  0;
+  } else if (obj.reviewRating === 3) {
+      return 4;
+  } else if (obj.reviewRating === 4) {
+      return  6;
+  } else  if (obj.reviewRating === 5) {
+      return 10;
   }//Calculates rating bonus
 }
-console.log(bonusPercent(values));
-function loyaltyBonus (values) {
-  if (values[1].length === 4) {
-    return 5;
+
+  function loyaltyBonus (obj) {
+    if (obj.employeeNumber.length === 4) {
+      return 5;
   } else {
-    return 0;
+      return 0;
   }//Caclulates loyaltyBonus
 }
-console.log(loyaltyBonus(values));
-function salarySize (values){
-    if (values[2] > '65000') {
+
+function salarySize (obj) {
+    if (obj.annualSalary > '65000') {
       return 1;
     } else {
       return 0;
     }//Calculates salary deduction
 }
-console.log(salarySize(values));
+var total = bonusPercent(obj) + loyaltyBonus(obj) - salarySize(obj);
 
-
-var total = bonusPercent(values) + loyaltyBonus(values) - salarySize(values);
  if (total > 13){
    total = 13;
- }//Keeps bonus from going over 13
-
+ } else if (total === -1) {
+   total = 0;
+ }
+ //Keeps bonus from going over 13
 return total;
-
 }//calculates total bonus percent
-console.log(calcBonus(jem));
 function totalBonus(bonusPercent, annualSalary){
   return Math.round((bonusPercent/100)*annualSalary);
-
 }//calculates total bonus $
-
-
 
 function totalComp(totalBonus, annualSalary){
   return (totalBonus + annualSalary);
 }
-
-console.log(totalComp(calcBonus(jem),jem.annualSalary));
-
 
 function employeeInfo( name, bonusPercent, totalComp, totalBonus ){
   this.name = name;
@@ -72,11 +63,16 @@ function employeeInfo( name, bonusPercent, totalComp, totalBonus ){
   this.totalBonus = totalBonus;
 };//new object creator
 
-function bonusForEmployee(obj){
+function bonusForEmployee(obj) {
 var bonusInfo = new employeeInfo ( obj.name, calcBonus(obj), totalComp( calcBonus(obj), obj.annualSalary), totalBonus( calcBonus(obj), obj.annualSalary) );
 return bonusInfo;
 }
-function bonusForEmployes (obj) {
-  for (var i = 0; )
+
+function bonusForEmployees (arr) {
+  var arrayOfEmployees = [];
+  for (var i = 0; i <arr.length; i++) {
+    arrayOfEmployees.push(bonusForEmployee(arr[i]));
+  } return arrayOfEmployees;
 }
-console.log(putItTogether(jem));
+
+console.log(bonusForEmployees(employees));
