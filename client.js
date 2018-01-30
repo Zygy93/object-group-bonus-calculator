@@ -8,5 +8,39 @@ var mayella = { name: "Mayella", employeeNumber: "89068", annualSalary: "35000",
 var employees = [ atticus, jem, boo, scout, robert, mayella ];
 
 // YOU SHOULD NOT NEED TO CHANGE ANYTHING ABOVE THIS POINT
-
 console.log(employees);
+function calcBonus (obj) {
+var values = Object.values(obj);
+console.log(values);
+function bonusPercent(values) {
+if (values[3] <= 2 ) {
+  return  0;
+  } else if (values[3] === 3) {
+    return 4;
+  } else if (values[3] === 4) {
+    return  6;
+  } else  if (values[3] === 5) {
+    return 10;
+  }
+}
+console.log(bonusPercent(values));
+function loyaltyBonus (values) {
+  if (values[1].length === 4) {
+    return 5;
+  } else {
+    return 0;
+  }
+}
+console.log(loyaltyBonus(values));
+function salarySize (values){
+    if (values[2] > '65000') {
+      return 1;
+    } else {
+      return 0;
+    }
+}
+console.log(salarySize(values));
+return bonusPercent(values) + loyaltyBonus(values) - salarySize(values);
+
+}
+console.log(calcBonus(jem));
