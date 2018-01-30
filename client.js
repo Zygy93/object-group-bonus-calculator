@@ -21,7 +21,7 @@ if (values[3] <= 2 ) {
     return  6;
   } else  if (values[3] === 5) {
     return 10;
-  }
+  }//Calculates rating bonus
 }
 console.log(bonusPercent(values));
 function loyaltyBonus (values) {
@@ -29,7 +29,7 @@ function loyaltyBonus (values) {
     return 5;
   } else {
     return 0;
-  }
+  }//Caclulates loyaltyBonus
 }
 console.log(loyaltyBonus(values));
 function salarySize (values){
@@ -37,15 +37,46 @@ function salarySize (values){
       return 1;
     } else {
       return 0;
-    }
+    }//Calculates salary deduction
 }
 console.log(salarySize(values));
-return bonusPercent(values) + loyaltyBonus(values) - salarySize(values);
 
-}
+
+var total = bonusPercent(values) + loyaltyBonus(values) - salarySize(values);
+ if (total > 13){
+   total = 13;
+ }//Keeps bonus from going over 13
+
+return total;
+
+}//calculates total bonus percent
 console.log(calcBonus(jem));
 function totalBonus(bonusPercent, annualSalary){
-  return ((bonusPercent/100)*annualSalary);
+  return Math.round((bonusPercent/100)*annualSalary);
 
+}//calculates total bonus $
+
+
+
+function totalComp(totalBonus, annualSalary){
+  return (totalBonus + annualSalary);
 }
-console.log(totalBonus());
+
+console.log(totalComp(calcBonus(jem),jem.annualSalary));
+
+
+function employeeInfo( name, bonusPercent, totalComp, totalBonus ){
+  this.name = name;
+  this.bonusPercent = bonusPercent;
+  this.totalComp = totalComp;
+  this.totalBonus = totalBonus;
+};//new object creator
+
+function bonusForEmployee(obj){
+var bonusInfo = new employeeInfo ( obj.name, calcBonus(obj), totalComp( calcBonus(obj), obj.annualSalary), totalBonus( calcBonus(obj), obj.annualSalary) );
+return bonusInfo;
+}
+function bonusForEmployes (obj) {
+  for (var i = 0; )
+}
+console.log(putItTogether(jem));
